@@ -1,7 +1,7 @@
-TYRÈNS 3.0
+MyPlaces 2.0
 =================================
 
-Frontedn resource README for Tyréns 3.0. 
+Frontedn resource README for MyPlaces 2.0. 
 The installation guide works for Windows only.
 
 Symbol explanations: 
