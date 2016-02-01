@@ -75,15 +75,7 @@ app.controller("postCtrl", [ "$scope", "posts", "Map", "$timeout", "$location", 
             });
         });
     };
-    a.getPosts = function() {
-        a.loading = true;
-        f.get("/post").success(function(b) {
-            a.posts = b;
-            console.log("$scope.posts i getPosts(): ", a.posts);
-            a.loading = false;
-        });
-    };
-    a.getPosts();
+    a.posts = b.posts;
     a.addPost = function() {
         a.loading = true;
         if (a.title === "") {

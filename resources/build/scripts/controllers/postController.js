@@ -101,7 +101,7 @@ app.controller('postCtrl', ['$scope', 'posts', 'Map', '$timeout', '$location' , 
   	};
 
 	//******* getPosts *******//
-	$scope.getPosts = function() {
+	/*$scope.getPosts = function() {
 		$scope.loading = true;
 	    $http.get('/post').success(function (result) {
 	        $scope.posts = result;
@@ -110,7 +110,9 @@ app.controller('postCtrl', ['$scope', 'posts', 'Map', '$timeout', '$location' , 
 	    });
 	};
 
-	$scope.getPosts();
+	$scope.getPosts();*/
+
+	$scope.posts = posts.posts;
 	
 	//******* addPost *******//
 	$scope.addPost = function() {
