@@ -69,6 +69,5 @@ To make js and css changes take affect you need to have grunt up and running wit
 
 Known issues
 ------------
-- Remeber to check out "Tyrens.Web.UI"-project in Visual Studio before editing any of the Resources files. Needed after check-in in the TFS.
 - NEVER include "bower_components" or "node_modules" in project. 
 - Sometimes the local sites isn´t reachable due to grunt build fail. Try to rebuild using the ``grunt`` command in a new instance of Git bash. 
