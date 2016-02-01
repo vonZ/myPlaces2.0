@@ -1,0 +1,23 @@
+{
+  "name": "myPlaces",
+  "version": "0.1.0",
+  "main": "../dist/app.min.js",
+  "description": "Resource service for myPlaces",
+  "dependencies": {
+    "angular": "1.4.*",
+    "jquery": "2.1.4",
+    "angular-bootstrap": "*",
+    "sass-bootstrap" : "*",
+    "angular-sanitize" : "*",
+    "lodash" : "*",
+    "angular-ui-router" : "*",
+    "angular-route" : "*",
+    "angular-resource" : "*",
+    "angular-animate" : "*"
+  },
+  "ignore": [
+    "node_modules",
+    "components",
+    "lib"
+  ]
+}

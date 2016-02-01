@@ -1,0 +1,21 @@
+[
+	{
+	"id": 1, 
+	"name": "Bar"
+	},
+
+	{
+	"id": 2, 
+	"name": "Restaurang"
+	},
+
+	{
+	"id": 3, 
+	"name": "Uteservering"
+	},
+	
+	{
+	"id": 4, 
+	"name": "Hotell"
+	}
+]

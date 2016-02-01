@@ -1,0 +1,44 @@
+/******
+	|-- Main SASS - file --| 
+
+		* Imports all partials 
+
+	|----------------------|
+******/
+
+@import "vendor/bootstrap/_bootstrap.scss";
+
+/*$fa-font-path: "../../../bower_components/fontawesome/fonts";
+@import "../../../bower_components/fontawesome/scss/font-awesome";*/
+
+
+@font-face {
+    font-family: 'Stark';
+    src: url('../assets/fonts/Stark.otf');
+}
+
+@font-face {
+	font-family: 'Existence-Light';
+    src: url('../fonts/Existence-Light.otf');
+}
+
+@font-face {
+	font-family: 'Diavlo_MEDIUM_II_37';
+    src: url('../fonts/Diavlo_MEDIUM_II_37.otf');
+}
+
+@font-face {
+	font-family: 'Diavlo_BOOK_II_37';
+    src: url('../fonts/Diavlo_BOOK_II_37.otf');
+}
+
+//Components
+@import "components/_baseComponents.scss";
+@import "components/_post.scss";
+
+//Base
+@import "base/_base.scss"; 
+
+
+
+

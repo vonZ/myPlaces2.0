@@ -1,0 +1,217 @@
+<% layout('layout') -%>
+
+  <div class="topWrapper col-md-12" id="AddCompetition">
+      <div class="inside" id="InnerTopWrapper">
+          <div class="desc floatLeft respCenter" id="PlusContainer">
+              <i class="fa fa-location-arrow fa-6x respCenterIcon"></i>
+          </div>
+          <div class="desc floatLeft respCenter" id="AddContainer">
+              <h1>My places</h1>
+              <span class="desc">Mina ställen, på ett ställe</span>
+          </div>
+      </div>
+  </div>
+
+  <section class="wrapper col-md-12">
+    <span ng-click="isPostFormOpen = !isPostFormOpen" class="boxItem pointer noPadding col-md-4">
+      <i class="fa fa-plus-circle"></i>
+      Lägg till ett nytt ställe
+    </span>
+    <div ng-init="isPostFormOpen = false" ng-show="isPostFormOpen" class="alert boxItem">
+      <form ng-submit="addPost()" class="col-md-12">
+        <div class="form-group">
+          <label for="exampleInputTitle">Titel</label>
+          <input type="text" class="form-control" autofocus placeholder="Titel" required ng-model="title" required ></input>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputTitle">Beskrivning</label>
+          <textarea class="form-control" autofocus placeholder="Beskrivning" required ng-model="description" required></textarea>
+        </div>
+        <div class="form-group">
+          <select ng-model="category" class="ddl" ng-options="item as item.name for item in items">
+             <option value="">Välj en kategori</option>
+          </select>
+        </div>
+        <div class="boxContainer col-md-6 boxRow">
+          <input type="file" ng-model="file" name="file" base-sixty-four-input required onload="onLoad" maxsize="500" accept="image/*" id="file">
+          <label for="file" class="col-md-4 boxItem pointer">
+            <i class="fa fa-picture-o"></i>
+            Lägg till en bild
+          </label>
+        </div>
+        <div class="boxContainer col-md-6 boxRow" data-ng-click="initMap()">
+          <span ng-click="isPlaceFormOpen = !isPlaceFormOpen" class="col-md-4 boxItem pointer noPadding" >
+            <i class="fa fa-map-marker"></i>
+            Lägg till plats
+          </span>
+        </div>
+      </form>
+
+      <!-- isPlaceFormOpen -->
+      <div ng-init="isPlaceFormOpen = false" ng-show="isPlaceFormOpen" class="formPadding">
+        <section>       
+          <label for="exampleInputLink">Lägg till plats</label> 
+          <form name="searchForm" novalidate ng-submit="search()">
+            <div class="alert alert-danger text-center" role="alert" ng-show="apiError">
+              <b>API Error : </b>
+              <span>{{ apiStatus }}</span>
+            </div>
+            <div class="input-group">
+                <input name="place" type="text" class="form-control" 
+                ng-model="searchPlace" placeholder="Sök plats" uib-typeahead="address for address in getLocation($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" class="form-control" required />
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" 
+                    ng-disabled="searchForm.$invalid">Sök</button>
+                </span>
+            </div>
+          </form>           
+        </section>
+        <div ng-if="place.name">
+          <div class="alert alert-info" role="alert">
+            <p>Resultatet på sökningen: {{place.name}}</p>
+          </div>
+        </div> 
+
+        <div id="map"></div>
+      </div>
+
+      <section class="formPadding">
+        <button type="submit" ng-click="addPost()" class="col-md-12 btn">
+          Lägg till
+        </button>
+      </section>
+    
+    </section>
+    </div>
+
+  <div id="class" ng-repeat="marker in markers">
+     <a href="#" ng-click="openInfoWindow($event, marker)">{{marker.title}}</a>
+  </div>
+
+  <hr />
+
+  <div class="cardHandler">
+    <ul>
+      <span class="col-md-12 twoButton">
+        <div ng-click="show=!show" class="boxItem">
+          <div ng-class="{hidden:!show}">
+            <i class="fa fa-globe"></i>
+            <span>Visa karta</span>
+          </div>
+          <div ng-class="{hidden:show}" data-ng-click="getPosts()">
+            <i class="fa fa-list"></i>
+            <span>Visa kort</span>
+          </div>
+        </div>
+      </span>
+    </ul>
+  </div>
+
+  <div ng-class="{hidden:show}">
+    <section class="col-md-12">
+      <div id="mapOverview"></div>
+    </section>
+  </div>
+
+  <div ng-class="{hidden:!show}">
+
+    <section class="col-md-12">
+
+      <form ng-submit="getPosts()">
+        <input type="text" ng-model="selected" uib-typeahead="post.title for post in posts | filter:$viewValue | limitTo:8" placeholder="Sök platser">
+      </form>
+
+      <!--<span ng-click="isSearchFormOpen = !isSearchFormOpen" class="pointer noPadding" >
+          <i class="fa fa-search fa-2x"></i>
+          Sök bland platser
+      </span>-->
+
+      <!--<div ng-init="isSearchFormOpen = false" ng-show="isSearchFormOpen">
+          <input type="text" ng-model="selected" uib-typeahead="state for state in states | filter:$viewValue | limitTo:8" class="form-control">
+      </div>-->
+      <section>
+        <div class="inside" id="Loading">
+          <loading></loading>
+        </div>
+      </section>
+      <section class="postSection">
+
+        <div ng-repeat="post in posts | orderBy: '-id' | filter:selected" class="postContainer">
+
+          <div class="{{post.category}} post col-md-12">
+
+            <div class="postImageSection">
+              <img ng-src="{{'data:image/png;base64,'+post.image}}" >
+            </div>
+
+            <div class="postMainBody">
+
+              <div class="postMainBodyHeader">
+                <div class="col-md-4 noPadding">
+                  <span class="placeType"></span>
+                </div>
+                <h3>{{post.title}}</h3>
+                <p class="label">
+                  <i class="fa fa-map-marker"></i>
+                  {{post.searchPlaceName}}
+                </p>
+                <p class="label">
+                  <i class="fa fa-clock-o"></i>
+                  {{post.createdAt}}
+                </p>
+              </div>
+              <div class="postMainBodyContent">
+                <p class="desc"> {{post.description}}</p>
+              </div>
+
+            </div>
+            
+            <hr class="footerDivider">
+            <div class="postFooter">   
+
+              <a ng-click="incrementUpvotes(post)" class="col-md-4 upvote pointer noPadding">
+                {{post.upvotes}} röster
+              </a>
+
+              <a ng-click="isCommentFormOpen = !isCommentFormOpen" class="pointer noPadding col-md-4">
+                Kommentera
+              </a>
+
+              <a ng-click="isEditFormOpen = !isEditFormOpen" class="col-md-4 pointer noPadding">
+                Redigera
+              </a>
+
+            </div>
+
+           <div class="arrow_box comment" ng-show="isCommentFormOpen"></div>
+           <div class="arrow_box edit" ng-show="isEditFormOpen"></div>
+
+
+          </div>
+          <div ng-init="isEditFormOpen = false" ng-show="isEditFormOpen" class="editForm">
+              <span class="pointer col-md-4 noPadding col-md-12">
+                <div ng-click="deletePost(post)" class="col-md-6 one-two delete">
+                  <i class="fa fa-trash"></i>
+                  <span>Radera</span>
+                </div>
+                <div class="col-md-6 one-two submit">
+                  <i class="fa fa-pencil"></i>
+                  <span>Redigera</span>
+                </div>
+              </span>
+          </div>
+
+          <div ng-init="isCommentFormOpen = false" ng-show="isCommentFormOpen" class="editForm">
+              <span class="pointer col-md-4 noPadding col-md-12">
+                <div class="col-md-12">
+                  Kommentera
+                </div>
+              </span>
+          </div>
+      </div>
+    </section>
+
+  </section>
+
+</div>
+

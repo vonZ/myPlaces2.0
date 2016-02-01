@@ -1,0 +1,77 @@
+.pointer {
+    cursor: pointer;
+}
+
+.fa-10x {
+	font-size: 10em !important; 
+}
+
+.fa-6x {
+	font-size: 6em !important; 
+}
+
+.fa-1and5x {
+	font-size: 1.5em !important; 
+}
+
+.alert {
+    text-align: center;
+}
+
+.col-md-3 {
+    float: left;
+    width: 25%;
+}
+
+.col-md-4 {
+    float: left;
+    width: 33%;
+}
+
+.col-md-5 {
+	float: left; 
+	width: 41.66667%;
+}
+
+.col-md-6 {
+    float: left;
+    width: 50%;
+}
+
+.col-md-12 {
+    float: left;
+    width: 100%;
+}
+
+.oneThree {
+    font-size: 1.3em !important; 
+}
+
+.right {
+    float: right; 
+}
+
+input {
+    border-radius: 0px;
+    box-shadow: none;
+    padding: 15px;
+    width: 100%; 
+}
+
+.twoButton {
+
+    &:first-child {
+        padding-left: 0px;
+    }
+
+    &:last-child {
+        padding-right: 0px;
+    }
+}
+
+.noPadding {
+	padding: 0px; 
+}
+
+
+

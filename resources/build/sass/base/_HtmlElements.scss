@@ -1,0 +1,235 @@
+@import "colors.scss";  
+
+ body {
+	min-width: 320px; 
+	font-family: "Diavlo_BOOK_II_37"; 
+    background-color: #ECECEC; 
+
+	& hr {
+	    border-top: 6px solid #CCC;
+        
+        &.footerDivider {
+	       border-top: 1px solid #CCC; 
+           margin: 5px 0px; 
+        }
+	}
+
+	& .wrapper {
+		input {
+			height: 51px;
+		}
+	} 
+}
+
+.ddl {
+    margin: 0;
+    padding: 7px;
+    width: 100%;
+    -webkit-appearance: none;
+    cursor: pointer;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    background: rgb(220, 220, 220) url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") no-repeat 95% center;
+}
+
+.dropup {
+    float: right; 
+
+    & .dropdown-menu {
+        left: -135px; 
+    }
+}
+
+.boxContainer {
+    width: 50%;
+    float: left;
+    padding: 0px 15px;
+
+    &.col-md-6 {
+        &:last-child {
+            padding-left: 10px; 
+        }
+    }
+}
+
+.boxRow {
+    & .boxItem {
+        float: left;
+        text-align: center;
+        background-color: white; 
+    }
+}
+
+.boxItem {
+    width: 100%;
+    padding: 10px;  
+    border: 1px solid $mediumGrey; 
+    background-color: $grey;
+    text-align: center; 
+    display: inline-block;
+    border-radius: 0px; 
+    margin-bottom: 10px; 
+
+    &.added {
+        background-color: #17395F;
+        color: white;
+
+        & i {
+            color: white;
+        }
+    }
+
+    & form {
+        padding: 0px; 
+        text-align: left; 
+
+        & input[type="file"] {
+            width: 0.1px;
+            height: 0.1px;
+            opacity: 0;
+            overflow: hidden;
+            position: absolute;
+            z-index: -1;
+        }
+
+        & label {
+            font-weight: normal;
+        }
+    }
+}
+
+.angular-google-map-container { height: 400px; }
+
+.infoWindowContent {
+    font-size:  14px !important;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+}
+
+.toggle {
+    display: inline-block;
+    width: 100%;
+    cursor: pointer;
+}
+
+
+button.btn {
+    width: 100%;
+    padding: 15px;
+    color: white;
+    font-weight: bold;
+    background-color: #48A23F;
+    text-transform: uppercase;
+
+    &:hover {
+    	background-color: #48A23F; 
+    	color: white; 
+    }
+}
+
+.form-group {
+    padding: 10px 15px; 
+    margin-bottom: 0px; 
+}
+
+.formPadding {
+    padding: 0px 15px; 
+}
+
+ #map,
+ #map1 {
+    width:100%;
+}
+
+#map {
+    height:300px;
+}
+
+#mapOverview {
+    height:500px;
+}
+
+section {
+	margin: 20px 0px;
+	display: inline-block;
+	width: 100%;  
+    text-align: left; 
+}
+
+.wrapper {
+    display: inline-block;
+    width: 100%;
+    float: none;
+}
+
+.topWrapper {
+    height: 200px;
+    padding: 0px;
+    background-color: $darkBlue;
+}
+
+.inside {
+    max-width: 352px;
+    margin: 0px auto;
+
+    &#InnerTopWrapper {
+
+	    & .respCenter {
+	    	float: none;
+    		margin: 0px auto;
+
+    		& h1 {
+    			text-align: center; 
+    			margin-top: 0px; 
+    			color: white; 
+    		}
+
+    		& .desc {
+    			color: white; 
+    			font-size: 20px; 
+                text-align: center;
+    		}
+
+    		&#PlusContainer {
+			    width: 67px;
+    		}
+
+    		&#AddContainer {
+			    width: 221px;
+    		}
+
+    		& .respCenterIcon {
+			    margin: 10px auto;
+			    color: white; 
+    		}
+	    }
+    }
+
+    &#Loading {
+        width: 128px; 
+        text-align: center; 
+    }
+}
+
+.logo {
+    position: relative;
+    left: 50%;
+    display: inline-block;
+
+    & .fa {
+    	width: 100px;
+	    display: inline-block;
+	    position: relative;
+	    left: -50%;
+        color: #942323;
+    }
+}
+
+.nav-tabs > li {
+    width: 50%;
+    text-align: center;
+}
+
+
+
