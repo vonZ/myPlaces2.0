@@ -9,7 +9,6 @@ var users = require('./routes/users');
 var app = express();
 var mongoose = require('mongoose');
 
-
 mongoose.connect('mongodb://localhost/ToDoThings');
 
 require('./models/Posts');

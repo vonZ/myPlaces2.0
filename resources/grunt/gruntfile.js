@@ -47,7 +47,7 @@ module.exports = function(grunt) {
       css: {
         src: [
           './bower_components/sass-bootstrap/dist/css/bootstrap-theme.min.css',
-          './bower_components/sass-bootstrap/dist/css/bootstrap.min.css'
+          './bower_components/sass-bootstrap/dist/css/bootstrap.min.css',
         ],
         dest: '../dist/dependencies.min.css'
       }
