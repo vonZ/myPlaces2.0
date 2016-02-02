@@ -19,11 +19,12 @@ app.factory('posts', ['$http', function($http){
 	};
 
 	//Creating a post
-	// o.create = function(post) {
-	// 	return $http.post('/post/create', post).success(function(data) {
-	// 		o.posts.push(data);
-	// 	});
-	// }
+	o.create = function(post) {
+		return $http.post('/create/', post).success(function(data) {
+			console.log("data: ", data); 
+			o.posts.push(data);
+		});
+	};
 
 	//Upvote a post
 	o.upvote = function(post) {

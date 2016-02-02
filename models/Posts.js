@@ -1,24 +1,14 @@
 var mongoose = require('mongoose');
 
-var imgPath = './public/files/';
-
 var PostSchema = new mongoose.Schema({
 	title: String,
 	description: String,
 	category: String,
-	tags: String,
 	searchPlaceName: String,
-	img: { data: Buffer, contentType: String },
+	img: String,
 	searchPlaceLat: {type: Number, default: 0},
-	searchPlaceLng: {type: Number, default: 0},
-	mapCollection: [{ 
-		type: mongoose.Schema.Types.ObjectId, 
-		ref: 'mapCollection' 
-	}],
-	upvotes: {type: Number, default: 0},
-	comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}]
+	searchPlaceLng: {type: Number, default: 0}
 });
-
 
 PostSchema.methods.upvote = function (cb) {
 	this.upvotes += 1;
