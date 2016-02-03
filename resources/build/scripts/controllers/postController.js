@@ -103,7 +103,7 @@ app.controller('postCtrl', ['$scope', 'posts', 'Map', '$timeout', '$location' , 
 	//******* getPosts *******//
 	$scope.getPosts = function() {
 		$scope.loading = true;
-	    $http.get('/posts').success(function (result) {
+	    $http.get('/getPosts').success(function (result) {
 	        $scope.posts = result;
 	        console.log("$scope.posts i getPosts(): ", $scope.posts); 
 	        $scope.loading = false;
@@ -134,65 +134,36 @@ app.controller('postCtrl', ['$scope', 'posts', 'Map', '$timeout', '$location' , 
 		// console.log("searchPlaceLat", $scope.place.lat);
 		// console.log("searchPlaceLng", $scope.place.lng);
 
+		function success (data) {
+			console.log("success");
+			$scope.getPosts();
+		}
+		function error(err){
+			console.log("error: ", err);
+		}
 
-		//Save to DB
-		// posts.create({
-		// 	title: $scope.title,
-		// 	description: $scope.description,
-		// 	category: $scope.category.name,
-		// 	searchPlaceName: $scope.place.name,
-		// 	img : $scope.base64,
-		// 	searchPlaceLat: $scope.place.lat,
-		// 	searchPlaceLng: $scope.place.lng
-		// });
-		
-		// console.log("name ", $scope.place.name);
-		
-		// $scope.title = '';
-		// $scope.description = '';
-		// $scope.category = [0];    
-		// $scope.tags = ''; 
-		// $scope.searchPlace = null; 
+		var data = {
+			"title": $scope.title,
+			"description": $scope.description,
+			"category": $scope.category.name,
+			"searchPlaceName": $scope.place.name,
+			"img" : $scope.base64,
+			"searchPlaceLat": $scope.place.lat,
+			"searchPlaceLng": $scope.place.lng
+		};
 
+		$http({ 
+			url: "/posts",
+			dataType: 'json',
+			method: "POST",
+			headers: {
+		        "Content-Type": "application/json"
+		    },
+			data: data 
+		})
+		.then(success, error);
 
-
-		// function success (data) {
-		// 	console.log("success");
-		// 	$scope.getPosts();
-		// }
-		// function error(err){
-		// 	console.log("error: ", err);
-		// }
-
-		// var data = {
-		// 	"title": $scope.title,
-		// 	"description": $scope.description,
-		// 	"category": $scope.category.name,
-		// 	"searchPlaceName": $scope.place.name,
-		// 	"img" : $scope.base64,
-		// 	"searchPlaceLat": $scope.place.lat,
-		// 	"searchPlaceLng": $scope.place.lng
-		// };
-
-		// $http({ 
-		// 	url: "/posts",
-		// 	dataType: 'json',
-		// 	method: "POST",
-		// 	headers: {
-		//         "Content-Type": "application/json"
-		//     },
-		// 	data: data 
-		// })
-		// .then(success, error);
-
-		posts.create({
-			title: $scope.title,
-			description: $scope.description,
-			searchPlaceName: $scope.place.name,
-			img : $scope.base64,
-			searchPlaceLat: $scope.place.lat,
-			searchPlaceLng: $scope.place.lng
-		});
+		console.log("data: ", data); 
 
 		$scope.title = '';
 		$scope.description = '';

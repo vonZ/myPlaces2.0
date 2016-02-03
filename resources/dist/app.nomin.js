@@ -77,7 +77,7 @@ app.controller("postCtrl", [ "$scope", "posts", "Map", "$timeout", "$location", 
     };
     a.getPosts = function() {
         a.loading = true;
-        f.get("/posts").success(function(b) {
+        f.get("/getPosts").success(function(b) {
             a.posts = b;
             console.log("$scope.posts i getPosts(): ", a.posts);
             a.loading = false;
@@ -92,14 +92,32 @@ app.controller("postCtrl", [ "$scope", "posts", "Map", "$timeout", "$location", 
         if (a.title === "") {
             return;
         }
-        b.create({
+        function b(b) {
+            console.log("success");
+            a.getPosts();
+        }
+        function c(a) {
+            console.log("error: ", a);
+        }
+        var d = {
             title: a.title,
             description: a.description,
+            category: a.category.name,
             searchPlaceName: a.place.name,
             img: a.base64,
             searchPlaceLat: a.place.lat,
             searchPlaceLng: a.place.lng
-        });
+        };
+        f({
+            url: "/posts",
+            dataType: "json",
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            data: d
+        }).then(b, c);
+        console.log("data: ", d);
         a.title = "";
         a.description = "";
         a.category = [ 0 ];
@@ -223,7 +241,7 @@ app.factory("posts", [ "$http", function(a) {
         });
     };
     b.create = function(c) {
-        return a.post("/posts", c).success(function(a) {
+        return a.post("/create", c).success(function(a) {
             console.log("data: ", a);
             b.posts.push(a);
         });
