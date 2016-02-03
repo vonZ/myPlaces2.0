@@ -7,7 +7,13 @@ var PostSchema = new mongoose.Schema({
 	searchPlaceName: String,
 	img: String,
 	searchPlaceLat: {type: Number, default: 0},
-	searchPlaceLng: {type: Number, default: 0}
+	searchPlaceLng: {type: Number, default: 0},
+	mapCollection: [{ 
+		type: mongoose.Schema.Types.ObjectId, 
+		ref: 'mapCollection' 
+	}],
+	upvotes: {type: Number, default: 0},
+	comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}]
 });
 
 PostSchema.methods.upvote = function (cb) {

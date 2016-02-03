@@ -1,6 +1,16 @@
 var express = require('express');
 var router = express.Router();
 
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'Express' });
+});
+
+var mongoose = require('mongoose');
+var Post = mongoose.model('Post');
+var Comment = mongoose.model('Comment'); 
+
 /* GET posts as json */
 router.get('/posts', function(req, res, next) {
 	Post.find(function(err, posts){
@@ -13,7 +23,7 @@ router.get('/posts', function(req, res, next) {
 
 
 /* POST posts as json */
-router.post('/create', function(req, res, next) {
+router.post('/posts', function(req, res, next) {
 	var post = new Post(req.body);
 
 	post.save(function(err, post){
@@ -100,6 +110,7 @@ router.put('/posts/:post/comments/:comment/upvote', function (req, res, next) {
 		res.json(comment);
 	});
 });
+
 
 
 module.exports = router;

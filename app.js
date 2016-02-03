@@ -5,30 +5,39 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var routes = require('./routes/index');
-var users = require('./routes/users');
-var app = express();
 var mongoose = require('mongoose');
-
-mongoose.connect('mongodb://localhost/myPlaces');
-// require('./config/database'); 
+var multipart = require('connect-multiparty');
+var multipartMiddleware = multipart();
 
 require('./models/Posts');
-require('./models/Comments');
 
-// var db = require('./config/database'); 
+//Mongoose
+mongoose.connect('mongodb://localhost/myPlaces');
+
+require('./models/Comments');
+var db = require('./config/database'); //load the config of the database mongolab
+
+var routes = require('./routes/index');
+var users = require('./routes/users');
+// var restImpl = require('./routes/restImpl');
+
+var app = express();
 
 app.engine('ejs', engine);
 app.set('view engine', 'ejs');
 
 app.set("view options", {layout: false});
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/resources'));
 
 app.get('/', function(req, res) {
     res.render('index.ejs');
 });
 
 app.use('/', routes);
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -38,12 +47,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'resources')));
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
-var bodyParser = require('body-parser');
-app.use(bodyParser.json({limit: '50mb'}));
-app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+app.use('/', routes);
+app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -75,7 +80,6 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 
 module.exports = app;

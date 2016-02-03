@@ -20,12 +20,12 @@ app.factory('posts', ['$http', function($http){
 
 	//Creating a post
 	o.create = function(post) {
-		return $http.post('/create/', post).success(function(data) {
+		return $http.post('/posts', post).success(function(data) {
 			console.log("data: ", data); 
 			o.posts.push(data);
 		});
 	};
-
+	
 	//Upvote a post
 	o.upvote = function(post) {
 		return $http.put('/posts/' + post._id + '/upvote')
