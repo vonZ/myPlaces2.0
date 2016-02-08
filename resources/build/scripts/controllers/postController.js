@@ -151,19 +151,26 @@ app.controller('postCtrl', ['$scope', 'posts', 'Map', '$timeout', '$location' , 
 			"searchPlaceLat": $scope.place.lat,
 			"searchPlaceLng": $scope.place.lng
 		};
-
+  
 		$http({ 
 			url: "/posts",
 			dataType: 'json',
 			method: "POST",
-			headers: {
-		        "Content-Type": "application/json"
-		    },
 			data: data 
 		})
 		.then(success, error);
+        
+              
+        // posts.create({
+		// 	title: $scope.title,
+		// 	description: $scope.description,
+		// 	category: $scope.category.name,
+		// 	searchPlaceLat: $scope.place.lat,
+		// 	searchPlaceLng: $scope.place.lng,
+		// 	searchPlaceName: $scope.place.name,
+		// 	img: $scope.base64
+		// });
 
-		console.log("data: ", data); 
 
 		$scope.title = '';
 		$scope.description = '';

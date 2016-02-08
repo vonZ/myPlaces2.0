@@ -1,4 +1,4 @@
-/*! myPlaces 2016-02-03 */
+/*! myPlaces 2016-02-08 */
 var app = angular.module("myApp", [ "ngRoute", "ngAnimate", "ui.router", "ui.bootstrap", "naif.base64" ]);
 
 app.controller("postCtrl", [ "$scope", "posts", "Map", "$timeout", "$location", "$http", "$q", "$window", "$rootScope", function(a, b, c, d, e, f, g, h, i) {
@@ -112,12 +112,8 @@ app.controller("postCtrl", [ "$scope", "posts", "Map", "$timeout", "$location", 
             url: "/posts",
             dataType: "json",
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
             data: d
         }).then(b, c);
-        console.log("data: ", d);
         a.title = "";
         a.description = "";
         a.category = [ 0 ];
@@ -241,7 +237,7 @@ app.factory("posts", [ "$http", function(a) {
         });
     };
     b.create = function(c) {
-        return a.post("/create", c).success(function(a) {
+        return a.post("/posts", c).success(function(a) {
             console.log("data: ", a);
             b.posts.push(a);
         });

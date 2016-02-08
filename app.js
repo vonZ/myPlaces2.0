@@ -9,16 +9,19 @@ var mongoose = require('mongoose');
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
 
-require('./models/Posts');
 
 //Mongoose
 mongoose.connect('mongodb://localhost/myPlaces');
+
+require('./models/Posts');
+
 
 require('./models/Comments');
 var db = require('./config/database'); //load the config of the database mongolab
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+
 // var restImpl = require('./routes/restImpl');
 
 var app = express();
@@ -35,15 +38,25 @@ app.get('/', function(req, res) {
 
 app.use('/', routes);
 
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+// app.use(connect.json());
+// app.use(connect.urlencoded());
+// app.use(connect.multipart());
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+// app.use(require('connect').bodyParser());
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'resources')));
 

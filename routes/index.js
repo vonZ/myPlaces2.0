@@ -1,15 +1,13 @@
 var express = require('express');
 var router = express.Router();
-
+var mongoose = require('mongoose');
+var Post = mongoose.model('Post');
+var Comment = mongoose.model('Comment');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
-});
-
-var mongoose = require('mongoose');
-var Post = mongoose.model('Post');
-var Comment = mongoose.model('Comment'); 
+}); 
 
 /* GET posts as json */
 router.get('/getPosts', function(req, res, next) {
@@ -25,7 +23,8 @@ router.get('/getPosts', function(req, res, next) {
 /* POST posts as json */
 router.post('/posts', function(req, res, next) {
 	var post = new Post(req.body);
-
+    console.log("post: ", req.body);
+    
 	post.save(function(err, post){
 		if (err) { return next(err); }
 		res.json(post);

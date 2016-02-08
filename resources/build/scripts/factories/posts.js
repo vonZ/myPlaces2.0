@@ -20,7 +20,7 @@ app.factory('posts', ['$http', function($http){
 
 	//Creating a post
 	o.create = function(post) {
-		return $http.post('/create', post).success(function(data) {
+		return $http.post('/posts', post).success(function(data) {
 			console.log("data: ", data); 
 			o.posts.push(data);
 		});
